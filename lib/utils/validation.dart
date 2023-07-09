@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import'package:intl/intl.dart';
 
 /// this class contains validation response
@@ -97,17 +96,17 @@ class DateUtils {
 
   static String? daysAheadAsString(int daysAhead){
     var presentDate = DateTime.now();
-    DateTime futureTime = presentDate.add(Duration(days: daysAhead));
+    DateTime futureTime = presentDate.add(Duration(days: daysAhead)); ///this function takes in the number of days ahead, adds to the present date and returns it as the future date
     return ftDateAsString(futureTime);
   }
 
   static String? ftDateAsString(DateTime futureTime){
-    return "${futureTime.year}-${futureTime.month.toString().padLeft(2, "0")}-${futureTime.day.toString().padLeft(2, "0")}";
+    return "${futureTime.year}-${futureTime.month.toString().padLeft(2, "0")}-${futureTime.day.toString().padLeft(2, "0")}"; ///this function converts the future date to string
   }
 
   static String? TrimDate(String date){
     if (date.contains(" ")) {
-      List<String> p = date.split(" ");
+      List<String> p = date.split(" "); ///if the date contains a space, this function splits it into a list and returns the value as date
       return p[0];
     }
     else

@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:tracked/screens/doclist.dart';
+import 'package:tracked/utils/locator_setup.dart';
 
-void main() {
+
+Future<void> main() async{
+
+  await locatorSetup();
   runApp(const Tracked());
 }
 
-class Tracked extends StatelessWidget {
+class Tracked extends StatefulWidget {
   const Tracked({super.key});
 
+  @override
+  State<Tracked> createState() => _TrackedState();
+}
+
+class _TrackedState extends State<Tracked> {
+
+  int _currentIndex = 0;
+  List<Widget> _screens = [UserScreen(), TodoScreen()];
+
+  onTap(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,7 +35,24 @@ class Tracked extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      // home:  DocList(),
+      home: Scaffold(
+        body: _screens[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTap,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'User',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.task),
+              label: 'Todos',
+            ),
+          ],
+          selectedItemColor: Colors.blue,
+          currentIndex: _currentIndex,
+        ),
+      ),
     );
   }
 }

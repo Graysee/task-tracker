@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "303773304446",
+    "project_id": "saferider-f4fd8",
+    "storage_bucket": "saferider-f4fd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303773304446:android:c3df3255d4638f42807a2f",
+        "android_client_info": {
+          "package_name": "com.techorb.saferider.saferider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303773304446-jf4g7d1elltcfmq4ro0183q7m0e0029n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxSkgns8gudFBfohLb3X7DSZDNSEOVcqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303773304446-jf4g7d1elltcfmq4ro0183q7m0e0029n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303773304446:android:c32c88cceaf2cf56807a2f",
+        "android_client_info": {
+          "package_name": "com.techorb.tracked"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303773304446-jf4g7d1elltcfmq4ro0183q7m0e0029n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxSkgns8gudFBfohLb3X7DSZDNSEOVcqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303773304446-jf4g7d1elltcfmq4ro0183q7m0e0029n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

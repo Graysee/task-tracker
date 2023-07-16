@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tracked/components/customtextformfiels.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tracked/components/rounded_button.dart';
 import 'package:tracked/screens/auth/auth_view_model.dart';
-import 'package:tracked/screens/doclist.dart';
-import 'package:tracked/utils/navigator.dart';
+import 'package:tracked/components/customtextformfiels.dart';
+import 'package:tracked/components/rounded_button.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({Key? key}) : super(key: key);
 
-  final TextEditingController _fullnameController = TextEditingController();
+class LogIn extends StatelessWidget {
+  LogIn({Key? key}) : super(key: key);
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -23,7 +19,7 @@ class SignUp extends StatelessWidget {
           return Scaffold(
             body: Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
               child: ListView(
                 children: [
                   Text(
@@ -40,12 +36,6 @@ class SignUp extends StatelessWidget {
                   Form(
                     child: Column(
                       children: [
-                        CustomTextFormField(
-                          onChanged: (text) {},
-                          controller: _fullnameController,
-                          fieldLabel: 'Full name',
-                        ),
-                        SizedBox(height: 15.0),
                         CustomTextFormField(
                           onChanged: (text) {},
                           controller: _emailController,

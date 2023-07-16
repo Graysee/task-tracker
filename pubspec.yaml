@@ -28,6 +28,8 @@ dependencies:
   firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
   stacked: ^3.4.1
+  step_progress_indicator: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:

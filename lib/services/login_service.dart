@@ -1,5 +1,5 @@
+class LoginService {
 
-class LoginService{
-  String? loginToken = 'My_login_token';
+  String loginToken = "my_login_token";
 
 }

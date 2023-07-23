@@ -22,11 +22,16 @@ class AuthViewModel extends BaseViewModel {
   }
 
   void login({String? email, String? password}) {
-    _authenticationService.loginWithEmail(email: email!, password: password!);
+
+    setBusy(true);
+    _authenticationService.loginWithEmail(email: email!, password: password!).then((value) {
+      setBusy(false);
+      _navigationService.navigateTo(doclistRoute);
+    }).onError((error, stackTrace) {
+    });
   }
 
   void navigateToSignup(){
-
     _navigationService.navigateTo(signupRoute);
   }
 }

@@ -1,25 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:tracked/model/user_model.dart';
 import 'package:tracked/services/navigation_service.dart';
-import 'package:tracked/utils/constants.dart';
 import 'package:tracked/utils/locator_setup.dart';
 import 'package:tracked/services/firestore_service.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final NavigationService _navigationService = locator<NavigationService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
 
+  UserModel? _currentUser;
+  UserModel? get currentUser => _currentUser;
+
+
+  Future _populateCurrentUser(User? user) async{
+    if (user != null){
+       _currentUser = await _firestoreService.getUser(user.uid);
+    }
+  }
+
   /// this function logs user into firebase
-  void loginWithEmail(
+  Future loginWithEmail(
       {required String email, required String password}) async {
     try {
-       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password).then((value) => _navigationService.navigateTo(doclistRoute));
+     UserCredential authResult =  await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+     await _populateCurrentUser(authResult.user);
+     return authResult.user!=null;
     } on FirebaseAuthException catch (e) {
-     SnackBar(content: Text(e.message.toString(), style: TextStyle(color: Colors.white),), backgroundColor: Colors.black,);
+    return e.message.toString();
     }
   }
 
@@ -37,13 +46,13 @@ class AuthenticationService {
      await _firestoreService.createUser(user);
      return authResult.user != null;
     }  on FirebaseAuthException catch (e) {
-      SnackBar(content:Text(e.message.toString(),),);
-      _navigationService.navigateTo(signupRoute);
+      return e.message.toString();
     }
   }
 
   Future<bool> isUserLoggedIn() async{
     User? user = await _firebaseAuth.currentUser;
+    await _populateCurrentUser(user);
     return user != null;
   }
 }

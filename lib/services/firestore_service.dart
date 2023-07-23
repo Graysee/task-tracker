@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:tracked/model/user_model.dart';
 
 class FirestoreService{
@@ -10,7 +9,16 @@ class FirestoreService{
     try {
       await _usersCollectionReference.doc(user!.id).set(user.toJson());
     } on FirebaseAuthException catch (e){
-      SnackBar(content: Text(e.message.toString()));
+      return e.message.toString();
+    }
+  }
+
+  Future getUser(String? uid) async {
+    try {
+    var  userData = await _usersCollectionReference.doc(uid).get();
+    return UserModel.fromJson(userData.data() as Map<String, dynamic>);
+    } on FirebaseException catch (e){
+      e.message.toString();
     }
   }
 }

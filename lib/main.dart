@@ -3,14 +3,13 @@ import 'package:tracked/screens/auth/signup.dart';
 import 'package:tracked/screens/doclist.dart';
 import 'package:tracked/screens/startup_view/startupview.dart';
 import 'package:tracked/services/navigation_service.dart';
-import 'package:tracked/services/service_locator.dart';
 import 'package:tracked/utils/constants.dart';
 import 'package:tracked/utils/locator_setup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'router.dart' as router;
 
- main() async{
-   WidgetsFlutterBinding.ensureInitialized();
+ Future main() async{
+    WidgetsFlutterBinding.ensureInitialized();
     setupLocator();
     await Firebase.initializeApp();
   runApp( const Tracked());
@@ -39,7 +38,7 @@ class _TrackedState extends State<Tracked> {
       initialRoute: startupRoute,
        // onGenerateRoute: (RouteSettings){},
     );
-  }
+  }  
 }
 
 

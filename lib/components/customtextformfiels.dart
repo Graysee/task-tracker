@@ -3,25 +3,32 @@ import 'package:flutter/services.dart';
 
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField(
+ const CustomTextFormField(
       {super.key,
-        required this.controller,
+        this.textEditingController,
         this.fieldLabel,
         this.icon,
         this.enabled,
-        this.onChanged});
+        this.onChanged,
+      this.keyboardtype,
+        // this.obscuretext
+      });
 
-  final TextEditingController? controller;
+  final TextEditingController? textEditingController;
   final String? fieldLabel;
   final Widget? icon;
   final bool? enabled;
+  final TextInputType? keyboardtype;
   final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // obscureText: obscuretext!,
+      controller: textEditingController,
       inputFormatters: [LengthLimitingTextInputFormatter(50)],
       cursorColor: Colors.black,
+      keyboardType: keyboardtype,
       textCapitalization: TextCapitalization.words,
       decoration: InputDecoration(
         // hintText: 'Full Name',

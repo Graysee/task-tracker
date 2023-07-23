@@ -1,18 +1,17 @@
 import 'package:stacked/stacked.dart';
+import 'package:tracked/services/auth_service.dart';
 import 'package:tracked/services/navigation_service.dart';
-import 'package:tracked/services/persistent_login.dart';
-import 'package:tracked/services/service_locator.dart';
 import 'package:tracked/utils/constants.dart';
 import 'package:tracked/utils/navigator.dart';
-import '';
+import 'package:tracked/utils/locator_setup.dart';
 
 class StartUpViewModel extends BaseViewModel{
-  final PersistLoginAuthService _persistLoginAuthService = locator<PersistLoginAuthService>();
+  final  AuthenticationService _authenticationService = locator<AuthenticationService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future handleStartUpLogic() async {
-    var hasLoggedInUser = await _persistLoginAuthService.isUserLoggedIn();
-    
+    var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
+
     if (hasLoggedInUser) {
       _navigationService.navigateTo(doclistRoute);
     }else {

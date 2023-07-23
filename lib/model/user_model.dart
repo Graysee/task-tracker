@@ -1,24 +1,16 @@
-class User {
-  final String? id;
-  final String? fullName;
-  final String? email;
-  final String? password;
+class UserModel {
+   String? id;
+   String? email;
+   String? fullName;
 
-  User({this.id, this.fullName, this.email, this.password});
+  UserModel({this.id, this.email, this.fullName});
 
-  User.fromData(Map<String, dynamic> data):
-      id = data['id'],
-  fullName=data['fullName'],
-  email=data['email'],
-  password=data['password'];
+  UserModel.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        email = json['email'],
+        fullName = json['fullName'];
 
   Map<String, dynamic> toJson() {
-    return {
-      'id' : id,
-      'fullName' : fullName,
-      'email' : email,
-      'password':password,
-    };
+    return {'id': id, 'fullName': fullName, 'email': email};
   }
-
 }

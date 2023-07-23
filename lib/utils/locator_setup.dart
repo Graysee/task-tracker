@@ -1,6 +1,7 @@
 
 import 'package:get_it/get_it.dart';
 import 'package:tracked/services/auth_service.dart';
+import 'package:tracked/services/dialog_service.dart';
 import 'package:tracked/services/firestore_service.dart';
 import 'package:tracked/services/login_service.dart';
 import 'package:tracked/services/navigation_service.dart';
@@ -14,5 +15,6 @@ void setupLocator(){
   locator.registerFactory(() => LoginService());
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => FirestoreService());
+  locator.registerLazySingleton(() => DialogService());
 } ///this function registers all the services we are making use of at one place, its called
 ///in the main so we can access it from anywhere

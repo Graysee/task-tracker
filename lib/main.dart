@@ -3,10 +3,10 @@ import 'package:tracked/screens/auth/signup.dart';
 import 'package:tracked/screens/doclist.dart';
 import 'package:tracked/screens/startup_view/startupview.dart';
 import 'package:tracked/services/navigation_service.dart';
-import 'package:tracked/utils/constants.dart';
+import 'package:tracked/constants/route_names_asigning.dart';
 import 'package:tracked/utils/locator_setup.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'router.dart' as router;
+import 'router_generated_routes.dart' as router;
 
  Future main() async{
     WidgetsFlutterBinding.ensureInitialized();

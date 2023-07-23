@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tracked/services/auth_service.dart';
 import 'package:tracked/services/navigation_service.dart';
-import 'package:tracked/utils/constants.dart';
+import 'package:tracked/constants/route_names_asigning.dart';
 import 'package:tracked/utils/locator_setup.dart';
 
 class AuthViewModel extends BaseViewModel {

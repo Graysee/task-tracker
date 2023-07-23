@@ -4,7 +4,7 @@ import 'package:tracked/screens/auth/login.dart';
 import 'package:tracked/screens/auth/signup.dart';
 import 'package:tracked/screens/doclist.dart';
 import 'package:tracked/screens/startup_view/startupview.dart';
-import 'package:tracked/utils/constants.dart';
+import 'package:tracked/constants/route_names_asigning.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

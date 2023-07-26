@@ -28,7 +28,7 @@ class AuthenticationService {
      await _populateCurrentUser(authResult.user);
      return authResult.user!=null;
     } on FirebaseAuthException catch (e) {
-    return e.message.toString();
+    return e.message;
     }
   }
 
@@ -46,7 +46,7 @@ class AuthenticationService {
      await _firestoreService.createUser(user);
      return authResult.user != null;
     }  on FirebaseAuthException catch (e) {
-      return e.message.toString();
+      return e.message;
     }
   }
 

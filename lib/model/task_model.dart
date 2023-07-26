@@ -1,7 +1,7 @@
 import 'package:tracked/utils/validation.dart';
 
 class Tasks {
-  int? id;
+  String? id;
   String? title;
   String? deadline;
   int? year;

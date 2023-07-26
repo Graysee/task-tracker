@@ -59,7 +59,6 @@ class SignUp extends StatelessWidget {
                     SizedBox(height: 20.0),
                     RoundedButton(
                       onPress: () {
-
                         if (
                         _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty && _fullnameController.text.isNotEmpty
                         ) {

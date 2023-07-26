@@ -25,8 +25,8 @@ class Val {
 
   ///This function converts integers above 0 to true and 0 to false depending on input
 
-  static bool IntToBool(int val){
-    return (val > 0)? true : false;
+  static bool IntToBool(int? val){
+    return (val! > 0)? true : false;
   }
 
   ///This function converts true or false of a string 1 0r 0 depending on input

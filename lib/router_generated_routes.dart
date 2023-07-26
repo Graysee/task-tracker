@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tracked/screens/add_task/add_task_view.dart';
 import 'package:tracked/screens/auth/login.dart';
 import 'package:tracked/screens/auth/signup.dart';
 import 'package:tracked/screens/doclist.dart';
@@ -15,6 +16,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SignUp());
       case doclistRoute:
         return MaterialPageRoute(builder: (_) => DocList());
+      case addtaskRoute:
+        return MaterialPageRoute(builder: (_) => AddTasks());
       case loginRoute:
         return MaterialPageRoute(builder: (_) => LogIn());
       default:
@@ -28,4 +31,4 @@ class Router {
   }
 }
 
-/// also write a case for tje screen that needs an argument
+/// also write a case for the screen that needs an argument

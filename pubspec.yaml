@@ -31,6 +31,8 @@ dependencies:
   stacked: ^3.4.1
   step_progress_indicator: ^1.0.2
   rflutter_alert: ^2.0.7
+  flutter_cupertino_date_picker: ^1.0.26+2
+  flutter_masked_text: ^0.8.0
 
 
 dev_dependencies:

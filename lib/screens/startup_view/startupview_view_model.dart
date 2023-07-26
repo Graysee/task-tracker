@@ -13,7 +13,7 @@ class StartUpViewModel extends BaseViewModel{
     var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
 
     if (hasLoggedInUser) {
-      _navigationService.navigateTo(doclistRoute);
+      _navigationService.navigateTo(addtaskRoute);
     }else {
       _navigationService.navigateTo(loginRoute);
     }

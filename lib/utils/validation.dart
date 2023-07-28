@@ -4,16 +4,16 @@ import'package:intl/intl.dart';
 class Val {
 
   /// Function that returns a validation message saying title cannot be empty
-  static String? ValidationTitle(String, val) {
+  static String? ValidationTitle(String? val) {
     return (val != null && val != "") ? null : "Title cannot be empty";
   }
 
   ///this function returns the number of days to expiry as a string
   static String? GetExpiryStr(String expires){
-    var expire = DateUtils.convertToDate(expires); ///this function takes the inputed time, uses the convertToDate function below to convert it to date
+    DateTime? expire = DateUtility.convertToDate(expires); ///this function takes the inputed time, uses the convertToDate function below to convert it to date
     var timediff = DateTime.now(); ///takes the present time and stores in a variable
 
-    Duration diff = timediff.difference(timediff); ///records the difference between expiry time and present time in duration
+    Duration diff = timediff.difference(expire!); ///records the difference between expiry time and present time in duration
     int diffdays = diff.inDays+1;  ///converts the difference to days between expiry time and present time from duration to days
     return (diffdays > 0)? diffdays.toString() : "0"; ///#returns the difference in days converted to string but returns 0 if it is less than 0
   }
@@ -40,7 +40,7 @@ class Val {
   }
 }
 
-class DateUtils {
+class DateUtility {
    ///This function converts date to a strict 'yyyy-mm-dd' format
   static DateTime? convertToDate(String input){
     try

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracked/screens/auth/signup.dart';
-import 'package:tracked/screens/doclist.dart';
+import 'package:tracked/screens/task_view/task_list_view.dart';
 import 'package:tracked/screens/startup_view/startupview.dart';
 import 'package:tracked/services/dialog_service.dart';
 import 'package:tracked/services/navigation_service.dart';

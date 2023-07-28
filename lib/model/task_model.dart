@@ -6,8 +6,8 @@ class Tasks {
   String? deadline;
   int? year;
   int? halfYear;
-  int? quarter;
-  int? month;
+  bool isDone = false;
+
 
   Tasks(
       {this.id,
@@ -15,8 +15,10 @@ class Tasks {
       this.deadline,
       this.year,
       this.halfYear,
-      this.quarter,
-      this.month});
+      this.isDone = false
+      });
+
+
 
   Tasks.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -24,8 +26,6 @@ class Tasks {
     deadline = json['deadline'];
     year = json['year'];
     halfYear = json['halfYear'];
-    quarter = json['quarter'];
-    month = json['month'];
   }
 
 
@@ -37,9 +37,11 @@ class Tasks {
     data['deadline'] = deadline;
     data['year'] = year;
     data['halfyear'] = halfYear;
-    data['quarter'] = quarter;
-    data['month'] = month;
 
     return data;
+  }
+
+ void toggleDone(bool? newValue){
+    isDone = newValue!;
   }
 }

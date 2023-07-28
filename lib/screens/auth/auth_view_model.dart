@@ -25,7 +25,7 @@ class AuthViewModel extends BaseViewModel {
      setBusy(false);
      if (result is bool) {
        if (result){
-         _navigationService.navigateTo(doclistRoute);
+         _navigationService.navigateTo(tasklistRoute);
        }else{
          await _dialogService.showDialog(
            title: 'Sign up Failure',
@@ -46,7 +46,7 @@ class AuthViewModel extends BaseViewModel {
     setBusy(false);
     if (result is bool){
       if (result){
-        _navigationService.navigateTo(doclistRoute);
+        _navigationService.navigateTo(tasklistRoute);
       }else{
         await _dialogService.showDialog(
           title: "Login Failed",

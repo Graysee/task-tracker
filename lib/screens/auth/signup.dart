@@ -5,7 +5,7 @@ import 'package:tracked/components/customtextformfiels.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tracked/components/rounded_button.dart';
 import 'package:tracked/screens/auth/auth_view_model.dart';
-import 'package:tracked/screens/doclist.dart';
+import 'package:tracked/screens/task_view/task_list_view.dart';
 import 'package:tracked/utils/navigator.dart';
 
 class SignUp extends StatelessWidget {

@@ -9,7 +9,7 @@ class Val {
   }
 
   ///this function returns the number of days to expiry as a string
-  static String? GetExpiryStr(String expires){
+  static String? getExpiryStr(String expires){
     DateTime? expire = DateUtility.convertToDate(expires); ///this function takes the inputed time, uses the convertToDate function below to convert it to date
     var timediff = DateTime.now(); ///takes the present time and stores in a variable
 
@@ -19,18 +19,17 @@ class Val {
   }
 
   ///This function converts strings to integer, checks if it is greater than 0 then converts to true or false if below 0 depending on input
-  static bool StrToBool(String str) {
+  static bool strToBool(String str) {
     return (int.parse(str)>0)? true : false;
   }
 
   ///This function converts integers above 0 to true and 0 to false depending on input
-
-  static bool IntToBool(int? val){
+  static bool intToBool(int? val){
     return (val! > 0)? true : false;
   }
 
-  ///This function converts true or false of a string 1 0r 0 depending on input
-  static String BoolToString(bool val){
+  ///This function converts true or false to a string 1 0r 0 depending on input
+  static String? boolToString(bool val){
     return (val == true) ? "1":"0";
   }
 

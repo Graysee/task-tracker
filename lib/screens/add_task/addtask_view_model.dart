@@ -12,22 +12,34 @@ import 'package:tracked/utils/locator_setup.dart';
 import 'package:tracked/utils/validation.dart';
 import 'package:tracked/services/dialog_service.dart';
 
-class AddTaskViewModel extends BaseViewModel{
-  final AuthenticationService _authenticationService = locator<AuthenticationService>();
+class AddTaskViewModel extends BaseViewModel {
+  final AuthenticationService _authenticationService = locator<
+      AuthenticationService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
 
-  static const menuDelete = "Delete"; /// menu option to delete
-  final List<String> menuOptions = const <String> [
+  static const menuDelete = "Delete";
+
+  /// menu option to delete
+  final List<String> menuOptions = const <String>[
     menuDelete
   ];
 
   late UserModel? currentUser = _authenticationService.currentUser;
   Tasks? tasks;
 
-  bool _isSwitched = false;
-  bool get isSwitched => _isSwitched;
+  // bool _isSwitched = false;
+  // bool get isSwitched => _isSwitched; this works for one switch
+
+
+  bool? switchValue;
+  String? selectedDate;
+
+  int _daysAhead = 365;
+  int get daysAhead => _daysAhead;
+
+  Map<String, bool> switchState = {'switchOne':false, 'switchTwo':true};
 
   ///TODO add the CRUD dart file here
 
@@ -42,56 +54,57 @@ class AddTaskViewModel extends BaseViewModel{
   // }
 
   Future addTask({required String? title, required String? deadline}) async {
-
     setBusy(true);
-    var result =  await _firestoreService.addPost(Tasks(title: title, id:currentUser!.id, deadline: deadline
-    ));
+    var result = await _firestoreService.addPost(
+        Tasks(title: title, id: currentUser!.id, deadline: deadline
+        ));
     setBusy(false);
 
-    if (result is String){
+    if (result is String) {
       await _dialogService.showDialog(
         title: "Could not add Post",
         description: result,
       );
     } else {
       await _dialogService.showDialog(
-        title: 'Post successfully added',
-        description: 'Your post has been created'
+          title: 'Post successfully added',
+          description: 'Your post has been created'
       );
     }
     _navigationService.goBack();
   }
 
 
-  void switched(bool value){
-    _isSwitched = value;
-    notifyListeners();
+  void switched(bool newValue) {
+    for(bool switchTitile in switchState.values){
+     switchValue = switchTitile;
+     switchValue = newValue;
+     notifyListeners();
+     print(switchValue);
+    }
   }
 
-  Future selectDate (context, dateContrl) async{
-    await showDatePicker(context: context, initialDate: DateTime.now(),
-        firstDate: DateTime(2021), lastDate: DateTime(2026)).then((value) {
-      if (value != null){
-        dateContrl = DateFormat("yyyy-MM-dd").format(value);
-      }
-    });
-  }
 
-  // Future _chooseDate(context, String? initialDateString) async {
-  //   DateTime now = DateTime.now();
-  //   var initialDate = DateUtility.convertToDate(initialDateString!) ?? now;
-  //
-  //   initialDate = (initialDate.year >= now.year && initialDate.isAfter(now)
-  //       ? initialDate
-  //       : now);
-  //
-  //   DatePicker.showDatePicker(context, onConfirm: (date, _) {
-  //     DateTime dt = date;
-  //     String? r = DateUtility.ftDateAsString(dt);
-  //     initialDateString = r;
-  //     notifyListeners();
-  //   }
-  //     // currentTime:initialDate
-  //   );
+  // void isSwitched(bool newValue) {
+  //    isSelected = newValue
+  //   notifyListeners();
   // }
+
+
+
+
+  Future<String>? selectDate(BuildContext context) async {
+   final DateTime? pickedDate = await showDatePicker(context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2021),
+        lastDate: DateTime(2026));
+    if (pickedDate != null) {
+      print(pickedDate);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(formattedDate);
+      selectedDate = formattedDate;
+      print(selectedDate);
+    }
+    return selectedDate!;
+  }
 }

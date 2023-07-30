@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tracked/components/checkbox.dart';
 import 'package:tracked/components/rounded_button.dart';
 import 'package:tracked/screens/add_task/addtask_view_model.dart';
 import 'package:tracked/utils/validation.dart';
@@ -33,6 +34,7 @@ class AddTasks extends StatelessWidget {
                         controller: titleController,
                         inputFormatters: [LengthLimitingTextInputFormatter(50)],
                         textCapitalization: TextCapitalization.words,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           icon: const Icon(
                             Icons.title,
@@ -45,11 +47,12 @@ class AddTasks extends StatelessWidget {
                         ),
                         enabled: true,
                         validator: (val) {
-                          Val.ValidationTitle(val);
-
-                          // if (val!.length < 4 || val.length > 49) {
-                          //   return "please enter a valid response";
-                          // }
+                          if (val == null || val.isEmpty) {
+                            return "Text field can\'t be empty";
+                          }
+                          if (val.length < 4 || val.length > 49) {
+                            return "please enter a valid response";
+                          }
                         },
                       ),
                       const SizedBox(
@@ -65,6 +68,7 @@ class AddTasks extends StatelessWidget {
                               cursorColor: Colors.black,
                               readOnly: true,
                               keyboardType: TextInputType.number,
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 icon: const Icon(
                                   Icons.calendar_month,
@@ -86,24 +90,16 @@ class AddTasks extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ListTile(
-                        title: const Text('a. Alert @ 1 day to deadline'),
-                        trailing: Switch(
-                            value: model.switchState['switchOne']!,
-                            onChanged: (value) {
-                              model.switched(value);
-                            }),
-                      ),
+                     ListTile(
+                       title: Text('Remind me a day to deadline'),
+                       trailing: Checkbox(value: model.options['switchOne'], onChanged: (value){model.isChecked(value!);}),
+                     ),
                       const SizedBox(
                         height: 10.0,
                       ),
                       ListTile(
-                        title: const Text('a. Alert @ 2 days to deadline'),
-                        trailing: Switch(
-                            value: model.switchState['switchTwo']!,
-                            onChanged: (value) {
-                              model.switched(value);
-                            }),
+                        title: Text('Remind me two days to deadline'),
+                        trailing: Checkbox(value: model.options['switchTwo'], onChanged: (value){model.isChecked(value!);}),
                       ),
                       RoundedButton(
                         onPress: () {

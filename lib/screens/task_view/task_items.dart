@@ -5,6 +5,7 @@ import 'package:tracked/screens/task_view/task_list_view_model.dart';
 
 class TaskItem extends StatelessWidget {
  final Tasks? task;
+
  const TaskItem({Key? key, required this.task}) : super(key: key);
 
 

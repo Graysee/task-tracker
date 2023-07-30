@@ -13,8 +13,8 @@ import 'package:tracked/utils/validation.dart';
 import 'package:tracked/services/dialog_service.dart';
 
 class AddTaskViewModel extends BaseViewModel {
-  final AuthenticationService _authenticationService = locator<
-      AuthenticationService>();
+
+  final AuthenticationService _authenticationService = locator<AuthenticationService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
@@ -29,17 +29,28 @@ class AddTaskViewModel extends BaseViewModel {
   late UserModel? currentUser = _authenticationService.currentUser;
   Tasks? tasks;
 
-  // bool _isSwitched = false;
-  // bool get isSwitched => _isSwitched; this works for one switch
+  bool _isSelected = false;
+  bool get isSelected => _isSelected;
 
 
-  bool? switchValue;
   String? selectedDate;
 
   int _daysAhead = 365;
   int get daysAhead => _daysAhead;
 
-  Map<String, bool> switchState = {'switchOne':false, 'switchTwo':true};
+  Map<String, bool> _options = {'switchOne': true, 'switchTwo':false};
+  Map<String, bool> get options => _options;
+
+  bool? singValue;
+
+  void isChecked(bool newValue){
+    for(bool value in _options.values){
+      singValue = value;
+    }
+    singValue = newValue;
+    notifyListeners();
+  }
+
 
   ///TODO add the CRUD dart file here
 
@@ -74,19 +85,20 @@ class AddTaskViewModel extends BaseViewModel {
     _navigationService.goBack();
   }
 
+bool? nevalue;
 
-  void switched(bool newValue) {
-    for(bool switchTitile in switchState.values){
-     switchValue = switchTitile;
-     switchValue = newValue;
-     notifyListeners();
-     print(switchValue);
-    }
-  }
+// bool? get nevalue=> _nevalue;
+//   void isTicked(bool newValue){
+//     for (var value in  _values.values){
+//       nevalue = value;
+//     }
+//     nevalue = newValue;
+//     notifyListeners();
+//   }
 
-
-  // void isSwitched(bool newValue) {
-  //    isSelected = newValue
+  // void isChecked(bool newValue) {
+  //    _isSelected = newValue;
+  //    _nevalue = newValue;
   //   notifyListeners();
   // }
 

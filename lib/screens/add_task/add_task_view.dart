@@ -105,9 +105,7 @@ class AddTasks extends StatelessWidget {
                         onPress: () {
                           if (titleController.text.isNotEmpty &&
                               deadlineController.text.isNotEmpty) {
-                            model.addTask(
-                                title: titleController.text,
-                                deadline: deadlineController.text);
+                            model.addTask(title: titleController.text, deadline: deadlineController.text);
                           }
                         },
                         buttonchild: const Text(

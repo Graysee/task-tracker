@@ -18,11 +18,11 @@ class TaskItem extends StatelessWidget {
       leading: Checkbox(
           value: model.isChecked,
           onChanged: (value){
-            model.toggleDoneness(value!);
+            model.toggleCheckboxState(value!);
           }
       ),
           title: Text(task!.title!, style: TextStyle(decoration:model.isChecked ? TextDecoration.lineThrough : null),),
-        // subtitle: Text(task!.deadline!),
+        subtitle: Text(task!.deadline!),
       );}
     );
   }

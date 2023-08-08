@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -7,8 +9,12 @@ import 'package:tracked/model/user_model.dart';
 class FirestoreService {
   final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection('users');
-  final CollectionReference _postCollectionReference =
-      FirebaseFirestore.instance.collection('posts');
+  final CollectionReference _tasksCollectionReference = FirebaseFirestore.instance.collection('posts');
+  final StreamController<List<Tasks>> _taskController = StreamController<List<Tasks>>.broadcast();
+
+  List<Tasks>? _task;
+  List<Tasks> get task => _task!;
+
 
   Future createUser(UserModel? user) async {
     try {
@@ -33,37 +39,23 @@ class FirestoreService {
     }
   }
 
-  Future addPost(Tasks? tasks) async {
+  Future addTask(Tasks task) async {
     try {
-      await _postCollectionReference.add(tasks!.toJson());
+      await _tasksCollectionReference.add(task.toJson());
       return true;
-
-      /// the action completed successfully
-    } on FirebaseException catch (e) {
-      if (e is PlatformException) {
-        return e.message;
-      }
-      return e.toString();
-    }
-  }
-
-  ///Read data from firestore using once off fetch
-  Future getPostOnceOff() async {
-    try {
-      var postDocuments = await _postCollectionReference.get(); ///returns a snap query which contains a doc collection
-      if (postDocuments.docs.isNotEmpty)  ///if the documents in the snapquery returned by firebase is not empty
-      {
-        return postDocuments.docs
-            .map((snapshot) =>
-                Tasks.fromJson(snapshot.data() as Map<String, dynamic>))
-            .where((mappedItem) => mappedItem.title != null)
-            .toList();
-      }
     } catch (e) {
-      if (e is PlatformException) {
-        return e.message;
-      }
       return e.toString();
     }
   }
+
+    Stream<List<Tasks>> listenToTaskRealTime(){
+      _tasksCollectionReference.snapshots().listen((tasksSnapshot) {
+      if (tasksSnapshot.docs.isNotEmpty){
+      var tasks = tasksSnapshot.docs.map((snapshot) => Tasks.fromJson(snapshot.data() as Map<String, dynamic>)).where((mappedItem) => mappedItem.title != null && mappedItem.deadline != null).toList();
+      _taskController.add(tasks);
+      }
+          });
+    return _taskController.stream;
+
+}
 }

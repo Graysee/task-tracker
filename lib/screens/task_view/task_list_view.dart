@@ -10,7 +10,7 @@ class TaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<TaskViewModel>.reactive(
         viewModelBuilder: () => TaskViewModel(),
-        onViewModelReady: (model) => model.fetchTasks(),
+        onViewModelReady: (model) => model.listenForTasks(),
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
@@ -22,11 +22,7 @@ class TaskList extends StatelessWidget {
               itemBuilder: (context, index)=>TaskItem(task: model.tasks![index],)
               ):
                   Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(
-                        Theme.of(context).primaryColor
-                      ),
-                    ),
+                    child: Text("No task added yet")
               ),
             floatingActionButton: FloatingActionButton(onPressed: (){
               model.navigateToAddTask();

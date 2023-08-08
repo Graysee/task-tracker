@@ -19,16 +19,9 @@ class AddTaskViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
 
-  static const menuDelete = "Delete";
+  UserModel? get currentUser => _authenticationService.currentUser;
 
-  /// menu option to delete
-  final List<String> menuOptions = const <String>[
-    menuDelete
-  ];
-
-  late UserModel? currentUser = _authenticationService.currentUser;
   Tasks? tasks;
-
   bool _isSelected = false;
   bool get isSelected => _isSelected;
 
@@ -53,58 +46,6 @@ class AddTaskViewModel extends BaseViewModel {
 
 
   ///TODO add the CRUD dart file here
-
-  // void initControllers (String? titleController, var deadlineController, var yearController, var halfYearController, var quarterController, var monthController){
-  //   titleController = tasks!.title != null ? tasks?.title : "";
-  //   deadlineController = tasks!.deadline != null ? tasks?.deadline : "";
-  //   yearController = tasks!.year != null ? Val.IntToBool(tasks!.year):false;
-  //   halfYearController = tasks!.halfYear != null ? Val.IntToBool(tasks!.halfYear):false;
-  //   quarterController = tasks!.quarter != null ? Val.IntToBool(tasks!.quarter):false;
-  //   monthController = tasks!.month != null ? Val.IntToBool(tasks?.month!):false;
-  //
-  // }
-
-  Future addTask({required String? title, required String? deadline}) async {
-    setBusy(true);
-    var result = await _firestoreService.addPost(
-        Tasks(title: title, id: currentUser!.id, deadline: deadline
-        ));
-    setBusy(false);
-
-    if (result is String) {
-      await _dialogService.showDialog(
-        title: "Could not add Post",
-        description: result,
-      );
-    } else {
-      await _dialogService.showDialog(
-          title: 'Post successfully added',
-          description: 'Your post has been created'
-      );
-    }
-    _navigationService.goBack();
-  }
-
-bool? nevalue;
-
-// bool? get nevalue=> _nevalue;
-//   void isTicked(bool newValue){
-//     for (var value in  _values.values){
-//       nevalue = value;
-//     }
-//     nevalue = newValue;
-//     notifyListeners();
-//   }
-
-  // void isChecked(bool newValue) {
-  //    _isSelected = newValue;
-  //    _nevalue = newValue;
-  //   notifyListeners();
-  // }
-
-
-
-
   Future<String>? selectDate(BuildContext context) async {
    final DateTime? pickedDate = await showDatePicker(context: context,
         initialDate: DateTime.now(),
@@ -119,4 +60,29 @@ bool? nevalue;
     }
     return selectedDate!;
   }
+
+
+
+  Future addTask({required String title, required String deadline }) async{
+    setBusy(true);
+    var result = await _firestoreService.addTask(Tasks(title: title, deadline: deadline, id:currentUser?.id));
+    setBusy(false);
+    validateResult(result);
+    _navigationService.navigateTo(tasklistRoute);
+  }
+
+  void validateResult(var result)async{
+    if (result is String){
+      await _dialogService.showDialog(
+          title: 'Could not add Post',
+          description: result
+      );
+    }else{
+      await _dialogService.showDialog(
+          title: 'Post successfully Added',
+          description: 'Your post has been created'
+      );
+    }
+  }
+
 }

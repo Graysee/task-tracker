@@ -6,7 +6,6 @@ class Tasks {
   String? deadline;
   int? year;
   int? halfYear;
-  bool isDone = false;
 
 
   Tasks(
@@ -15,7 +14,6 @@ class Tasks {
       this.deadline,
       this.year,
       this.halfYear,
-      this.isDone = false
       });
 
 
@@ -41,7 +39,5 @@ class Tasks {
     return data;
   }
 
- void toggleDone(bool? newValue){
-    isDone = newValue!;
-  }
+
 }

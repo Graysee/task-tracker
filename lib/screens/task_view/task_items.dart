@@ -5,8 +5,9 @@ import 'package:tracked/screens/task_view/task_list_view_model.dart';
 
 class TaskItem extends StatelessWidget {
  final Tasks? task;
+ final void Function()? onDeleteTask;
 
- const TaskItem({Key? key, required this.task}) : super(key: key);
+ const TaskItem({Key? key, required this.task, this.onDeleteTask}) : super(key: key);
 
 
   @override
@@ -19,6 +20,10 @@ class TaskItem extends StatelessWidget {
           value: model.isChecked,
           onChanged: (value){
             model.toggleCheckboxState(value!);
+            if (onDeleteTask != null){
+              onDeleteTask!();
+            }
+            
           }
       ),
           title: Text(task!.title!, style: TextStyle(decoration:model.isChecked ? TextDecoration.lineThrough : null),),

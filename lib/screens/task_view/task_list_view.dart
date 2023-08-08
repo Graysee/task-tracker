@@ -19,7 +19,8 @@ class TaskList extends StatelessWidget {
             ),
             body: model.tasks != null ? ListView.builder(
               itemCount: model.tasks!.length,
-              itemBuilder: (context, index)=>TaskItem(task: model.tasks![index],)
+              itemBuilder: (context, index)=>TaskItem(task: model.tasks![index], onDeleteTask: (){model.deleteTask(index);})
+
               ):
                   Center(
                     child: Text("No task added yet")

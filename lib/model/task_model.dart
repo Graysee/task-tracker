@@ -1,29 +1,29 @@
-import 'package:tracked/utils/validation.dart';
-
 class Tasks {
-  String? id;
-  String? title;
-  String? deadline;
-  int? year;
-  int? halfYear;
+ final String? id;
+ final String? title;
+ final String? deadline;
+ final int? halfYear;
+ final String? documentId;
 
 
   Tasks(
       {this.id,
       this.title,
       this.deadline,
-      this.year,
       this.halfYear,
+        this.documentId
       });
 
 
 
-  Tasks.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    title = json['title'];
-    deadline = json['deadline'];
-    year = json['year'];
-    halfYear = json['halfYear'];
+  static Tasks fromJson(Map<String, dynamic> json, String documentId){
+    return Tasks(
+    id : json['id'],
+    title : json['title'],
+    deadline : json['deadline'],
+    halfYear : json['halfYear'],
+    documentId:documentId,
+    );
   }
 
 
@@ -33,7 +33,6 @@ class Tasks {
     data['id'] = id;
     data['title'] = title;
     data['deadline'] = deadline;
-    data['year'] = year;
     data['halfyear'] = halfYear;
 
     return data;

@@ -20,6 +20,8 @@ class TaskViewModel extends BaseViewModel {
   List<Tasks>? _task;
   List<Tasks>? get tasks => _task;
 
+  void Function()? onDeleteItem;
+
   bool _isChecked = false;
   bool get isChecked => _isChecked;
 
@@ -27,12 +29,18 @@ class TaskViewModel extends BaseViewModel {
     setBusy(true);
     _firestoreService.listenToTaskRealTime().listen((tasksDate) {
       List<Tasks> updatedTasks = tasksDate;
-      if (updatedTasks != null && updatedTasks.length >0){
+      if (updatedTasks != null && updatedTasks.isNotEmpty){
         _task = updatedTasks;
         notifyListeners();
       }
       setBusy(false);
     });
+  }
+
+  Future deleteTask(int index) async{
+   setBusy(true);
+   await _firestoreService.deleteTask(_task![index].documentId);
+   setBusy(false);
   }
 
   

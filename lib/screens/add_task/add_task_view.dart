@@ -7,13 +7,14 @@ import 'package:tracked/components/rounded_button.dart';
 import 'package:tracked/screens/add_task/addtask_view_model.dart';
 import 'package:tracked/utils/validation.dart';
 
-class AddTasks extends StatelessWidget {
-  AddTasks({Key? key}) : super(key: key);
+import '../../model/task_model.dart';
 
+class AddTasks extends StatelessWidget {
+  AddTasks({Key? key, this.editTask}) : super(key: key);
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController deadlineController = TextEditingController();
-
+  final Tasks? editTask;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddTaskViewModel>.reactive(

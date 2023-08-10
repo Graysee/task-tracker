@@ -65,7 +65,20 @@ class FirestoreService {
     return _taskController.stream;
   }
 
+  Future updateTask(Tasks task)async{
+    try {
+      await _tasksCollectionReference.doc(task.documentId).update(task.toJson());
+      return true;
+    } catch (e){
+      if (e is PlatformException){
+        return e.message;
+      }
+      return e.toString();
+    }
+  }
+
+
   Future deleteTask(String? documentId) async {
-    await _tasksCollectionReference.doc('documentId').delete();
+    await _tasksCollectionReference.doc(documentId).delete();
   }
 }

@@ -25,7 +25,6 @@ class AddTaskViewModel extends BaseViewModel {
   bool _isSelected = false;
   bool get isSelected => _isSelected;
 
-
   String? selectedDate;
 
   int _daysAhead = 365;
@@ -52,11 +51,8 @@ class AddTaskViewModel extends BaseViewModel {
         firstDate: DateTime(2021),
         lastDate: DateTime(2026));
     if (pickedDate != null) {
-      print(pickedDate);
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      print(formattedDate);
       selectedDate = formattedDate;
-      print(selectedDate);
     }
     return selectedDate!;
   }
@@ -70,6 +66,7 @@ class AddTaskViewModel extends BaseViewModel {
     validateResult(result);
     _navigationService.navigateTo(tasklistRoute);
   }
+
 
   void validateResult(var result)async{
     if (result is String){

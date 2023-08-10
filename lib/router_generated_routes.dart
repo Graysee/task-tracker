@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tracked/model/task_model.dart';
 import 'package:tracked/screens/add_task/add_task_view.dart';
 import 'package:tracked/screens/auth/login.dart';
 import 'package:tracked/screens/auth/signup.dart';
@@ -15,7 +16,8 @@ class Router {
       case signupRoute:
         return MaterialPageRoute(builder: (_) => SignUp());
       case tasklistRoute:
-        return MaterialPageRoute(builder: (_) => TaskList());
+        return MaterialPageRoute(builder: (_) => TaskList(
+        ));
       case addtaskRoute:
         return MaterialPageRoute(builder: (_) => AddTasks());
       case loginRoute:

@@ -17,20 +17,24 @@ class TaskList extends StatelessWidget {
               title: const Text('Tasks'),
               backgroundColor: Colors.indigo,
             ),
-            body: model.tasks != null ? ListView.builder(
-              itemCount: model.tasks!.length,
-              itemBuilder: (context, index)=>TaskItem(task: model.tasks![index], onDeleteTask: (){model.deleteTask(index);})
-
-              ):
-                  Center(
-                    child: Text("No task added yet")
+            body: model.tasks != null
+                ? ListView.builder(
+                    itemCount: model.tasks!.length,
+                    itemBuilder: (context, index) => TaskItem(
+                        task: model.tasks![index],
+                        onDeleteTask: () => model.deleteTask(index)
+                        ))
+                : const Center(child: Text("No task added yet")),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                model.navigateToAddTask();
+              },
+              child: const Icon(
+                Icons.add,
+                size: 40.0,
               ),
-            floatingActionButton: FloatingActionButton(onPressed: (){
-              model.navigateToAddTask();
-            },
-            child: const Icon(Icons.add, size: 40.0, ),
             ),
           );
         });
-        }
   }
+}

@@ -20,8 +20,6 @@ class TaskViewModel extends BaseViewModel {
   List<Tasks>? _task;
   List<Tasks>? get tasks => _task;
 
-  void Function()? onDeleteItem;
-
   bool _isChecked = false;
   bool get isChecked => _isChecked;
 
@@ -49,8 +47,8 @@ class TaskViewModel extends BaseViewModel {
     notifyListeners();
   }
   
-  void navigateToAddTask() {
-    _navigationService.navigateTo(addtaskRoute);
+  Future navigateToAddTask() async{
+    await _navigationService.navigateTo(addtaskRoute);
   }
 
 }

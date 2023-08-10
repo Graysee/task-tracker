@@ -19,32 +19,17 @@ class AddTaskViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
 
-  UserModel? get currentUser => _authenticationService.currentUser;
-
   Tasks? tasks;
+  String? selectedDate;
+
   bool _isSelected = false;
   bool get isSelected => _isSelected;
-
-  String? selectedDate;
 
   int _daysAhead = 365;
   int get daysAhead => _daysAhead;
 
-  Map<String, bool> _options = {'switchOne': true, 'switchTwo':false};
-  Map<String, bool> get options => _options;
+  UserModel? get currentUser => _authenticationService.currentUser;
 
-  bool? singValue;
-
-  void isChecked(bool newValue){
-    for(bool value in _options.values){
-      singValue = value;
-    }
-    singValue = newValue;
-    notifyListeners();
-  }
-
-
-  ///TODO add the CRUD dart file here
   Future<String>? selectDate(BuildContext context) async {
    final DateTime? pickedDate = await showDatePicker(context: context,
         initialDate: DateTime.now(),
@@ -56,7 +41,6 @@ class AddTaskViewModel extends BaseViewModel {
     }
     return selectedDate!;
   }
-
 
 
   Future addTask({required String title, required String deadline }) async{

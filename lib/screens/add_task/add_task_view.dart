@@ -91,17 +91,6 @@ class AddTasks extends StatelessWidget {
                           ),
                         ],
                       ),
-                     ListTile(
-                       title: Text('Remind me a day to deadline'),
-                       trailing: Checkbox(value: model.options['switchOne'], onChanged: (value){model.isChecked(value!);}),
-                     ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      ListTile(
-                        title: Text('Remind me two days to deadline'),
-                        trailing: Checkbox(value: model.options['switchTwo'], onChanged: (value){model.isChecked(value!);}),
-                      ),
                       RoundedButton(
                         onPress: () {
                           if (titleController.text.isNotEmpty &&

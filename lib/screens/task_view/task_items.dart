@@ -16,23 +16,31 @@ class TaskItem extends StatelessWidget {
     return ViewModelBuilder<TaskViewModel>.reactive(
       viewModelBuilder: ()=>TaskViewModel(),
       builder: (context, model, child){
-      return ListTile(
-        onTap: (){
-          onEditTask!();
-        },
-      leading: Checkbox(
-          value: model.isChecked,
-          onChanged: (value){
-            model.toggleCheckboxState(value!);
-            if (onDeleteTask != null){
-              Future.delayed(Duration(seconds: 2));
-              onDeleteTask!();
-            }
-            
-          }
-      ),
-          title: Text(task!.title!, style: TextStyle(decoration:model.isChecked ? TextDecoration.lineThrough : null),),
-        subtitle: Text(task!.deadline!),
+      return Column(
+        children: [
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            minVerticalPadding: 0.0,
+            onTap: (){
+              onEditTask!();
+            },
+          leading: Checkbox(
+              shape: const CircleBorder(),
+              value: model.isChecked,
+              onChanged: (value){
+                model.toggleCheckboxState(value!);
+                if (onDeleteTask != null){
+                  Future.delayed(Duration(seconds: 2));
+                  onDeleteTask!();
+                }
+
+              }
+          ),
+              title: Text(task!.title!, style: TextStyle(decoration:model.isChecked ? TextDecoration.lineThrough : null),),
+            subtitle: Text(task!.deadline!),
+          ),
+          Divider(height: 5.0,color: Colors.black26,)
+        ],
       );}
     );
   }

@@ -24,7 +24,7 @@ class AddTasks extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
                 appBar: AppBar(
-                  title: const Text("New Document"),
+                  title: const Text("Add New Task"),
                 ),
                 body: Padding(
                   padding: const EdgeInsets.symmetric(

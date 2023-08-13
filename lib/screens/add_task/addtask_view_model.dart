@@ -48,7 +48,6 @@ class AddTaskViewModel extends BaseViewModel {
     var result = await _firestoreService.addTask(Tasks(title: title, deadline: deadline, id:currentUser?.id));
     setBusy(false);
     validateResult(result);
-    _navigationService.navigateTo(tasklistRoute);
   }
 
 
@@ -64,6 +63,7 @@ class AddTaskViewModel extends BaseViewModel {
           description: 'Your post has been created'
       );
     }
+    await _navigationService.navigateTo(tasklistRoute);
   }
 
 }
